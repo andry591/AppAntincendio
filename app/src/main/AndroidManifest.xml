@@ -13,12 +13,18 @@
         android:theme="@style/Theme.AppAntincendio"
         tools:targetApi="31">
         <activity
+            android:name=".RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".SecondActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.AppAntincendio"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.AppAntincendio">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,15 +1,11 @@
 package com.example.appantincendio;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
-import androidx.activity.EdgeToEdge;
+import android.os.Bundle;
+import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,18 +15,28 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Get the button from the layout
-        final Button buttonInvia = findViewById(R.id.buttonInvia);
+        final Button registratiButton = findViewById(R.id.registrati);
+        final Button loginButton = findViewById(R.id.login);
 
-        if (buttonInvia != null) {
+        if (registratiButton != null) {
             // Assign a listener to the button
-            buttonInvia.setOnClickListener(new View.OnClickListener() {
+            registratiButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-                    startActivity(intent);
+                    startActivity(new Intent(MainActivity.this, RegisterActivity.class));
                 }
+            });
+        }
 
+        if (loginButton != null) {
+            // Assign a listener to the button
+            loginButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                }
             });
         }
     }
+
 }

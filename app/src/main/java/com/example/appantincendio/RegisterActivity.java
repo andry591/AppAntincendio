@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,5 +38,14 @@ public class RegisterActivity extends AppCompatActivity {
 
             });
         }
+
+        EditText nomeEditText = findViewById(R.id.nome);
+        EditText emailEditText = findViewById(R.id.email);
+        EditText dataNascitaEditText = findViewById(R.id.data_nascita);
+        EditText passwordEditText = findViewById(R.id.password);
+        Button registratiButton = findViewById(R.id.registrati);
+
+
+
     }
 }

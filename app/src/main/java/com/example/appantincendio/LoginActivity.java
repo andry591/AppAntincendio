@@ -26,20 +26,23 @@ public class LoginActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Get the button from the layout
-        final Button buttonInvia = findViewById(R.id.indietro);
+        Button btnEffettuaAccesso = findViewById(R.id.accedi);
+        btnEffettuaAccesso.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
-        if (buttonInvia != null) {
-            // Assign a listener to the button
-            buttonInvia.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    startActivity(intent);
-                }
-
-            });
-        }
+        Button btnIndietro = findViewById(R.id.indietro);
+        btnIndietro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
     }

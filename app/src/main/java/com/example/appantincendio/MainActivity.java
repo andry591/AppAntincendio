@@ -14,29 +14,23 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Get the button from the layout
-        final Button registratiButton = findViewById(R.id.registrati);
-        final Button loginButton = findViewById(R.id.login);
+        Button btnLogin = findViewById(R.id.login);
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
 
-        if (registratiButton != null) {
-            // Assign a listener to the button
-            registratiButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(MainActivity.this, RegisterActivity.class));
-                }
-            });
-        }
-
-        if (loginButton != null) {
-            // Assign a listener to the button
-            loginButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                }
-            });
-        }
+        Button btnRegistrazione = findViewById(R.id.registrati);
+        btnRegistrazione.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
 }

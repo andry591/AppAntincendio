@@ -1,16 +1,22 @@
 package com.example.appantincendio;
 
 import android.content.Intent;
+import android.util.Log;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
+import android.widget.Toast;
+import android.widget.CalendarView;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import com.google.gson.Gson;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -25,27 +31,51 @@ public class RegisterActivity extends AppCompatActivity {
             return insets;
         });
 
-        final Button backButton = findViewById(R.id.torna);
+        //Collegamento con elementi grafici
 
-        if (backButton != null) {
-            // Assign a listener to the button
-            backButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                    startActivity(intent);
-                }
+        EditText nome = findViewById(R.id.nome);
+        EditText cognome = findViewById(R.id.cognome);
+        EditText email = findViewById(R.id.email);
+        EditText password = findViewById(R.id.password);
+        CalendarView dataNascita = findViewById(R.id.data_nascita);
+        final String[] dataFormattata = new String[1];
 
-            });
-        }
+        dataNascita.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
+                // Formatta la data
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                java.util.Calendar cal = java.util.Calendar.getInstance();
+                cal.set(year, month, dayOfMonth);
+                dataFormattata[0] = sdf.format(cal.getTime());
+            }
+        });
 
-        EditText nomeEditText = findViewById(R.id.nome);
-        EditText emailEditText = findViewById(R.id.email);
-        EditText dataNascitaEditText = findViewById(R.id.data_nascita);
-        EditText passwordEditText = findViewById(R.id.password);
-        Button registratiButton = findViewById(R.id.registrati);
+        Button btnEffettuaRegistrazione = findViewById(R.id.registrati);
+        btnEffettuaRegistrazione.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Utente utente = new Utente(nome.getText().toString(), cognome.getText().toString(), email.getText().toString(),dataFormattata[0],password.getText().toString());
+
+                Gson gson = new Gson();
+                String utentejson = gson.toJson(utente);
+
+                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                intent.putExtra("utente", utentejson);
+                startActivity(intent);
+
+                //Uso del log
+                Log.d("Registrazione", "Utente JSON: " + utentejson);
+                Log.d("Registrazione", "Nome: " + nome.getText().toString());
+                Log.d("Registrazione", "Cognome: " + cognome.getText().toString());
+                Log.d("Registrazione", "Email: " + email.getText().toString());
+                Log.d("Registrazione", "Password: " + password.getText().toString());
+                //Messaggio pop up che mi da una conferma di registrazione avvenuta con successo
+                Toast.makeText(RegisterActivity.this, "Registrazione avvenuta con successo", Toast.LENGTH_SHORT).show();
+            }
 
 
+        });
 
     }
+
 }
